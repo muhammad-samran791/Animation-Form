@@ -34,6 +34,7 @@ body {
   flex-direction: column;
   justify-content: center;
   padding: 0;
+  z-index: 99; /* Form text ko background layer se upar rakhne ke liye */
 }
 
 .wrapper .form-box.login {
@@ -59,6 +60,11 @@ body {
 .wrapper .form-box.register {
   right: 0;
   padding: 0 40px 0 60px;
+  pointer-events: none; /* Deactive state par click disabled rakhne k liye */
+}
+
+.wrapper.active .form-box.register {
+  pointer-events: auto;
 }
 
 .wrapper .form-box.register .animation {
@@ -105,9 +111,7 @@ body {
 
 .input-box input:focus,
 .input-box input:valid {
-  border-bottom-color: #081b29;
-  background: #081b29;
-  color: white;
+  border-bottom-color: #0ef; /* Pehle yahan background color overlap ho raha tha, ab perfect hai */
 }
 
 .input-box label {
@@ -142,9 +146,22 @@ body {
   color: #0ef;
 }
 
+/* Custom CSS Button (Replacing Bootstrap btn classes) */
 .btn {
   position: relative;
+  width: 100%;
+  height: 45px;
+  background: transparent;
+  border: 2px solid #0ef;
+  outline: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #0ef;
+  font-weight: 600;
+  z-index: 1;
   overflow: hidden;
+  transition: 0.5s;
 }
 
 .btn::before {
@@ -163,10 +180,27 @@ body {
   top: 0;
 }
 
+.btn:hover {
+  color: #081b29;
+}
+
+/* Links Text Pure CSS (Replacing Bootstrap link/text utilities) */
 .logreg-link {
   font-size: 14.5px;
+  color: #fff;
   text-align: center;
   margin: 20px 0 10px;
+}
+
+.logreg-link p a {
+  color: #0ef;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.logreg-link p a:hover {
+  text-decoration: underline;
 }
 
 .wrapper .info-text {
@@ -177,6 +211,7 @@ body {
   top: 0;
   width: 50%;
   height: 100%;
+  color: #fff;
 }
 
 .wrapper .info-text.login {
